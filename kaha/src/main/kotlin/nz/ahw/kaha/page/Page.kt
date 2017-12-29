@@ -11,9 +11,9 @@ import nz.ahw.kaha.Handler
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class Page(val layout: Layout, val body: PageContext.() -> Unit): Handler {
+class Page(val layout: Layout = EmptyLayout, val title: String = "", val body: PageContext.() -> Unit): Handler {
     override fun apply(request: HttpServletRequest, response: HttpServletResponse) {
-            layout.apply(request, response, body)
+            layout.apply(request, response, title, body)
     }
 
 }

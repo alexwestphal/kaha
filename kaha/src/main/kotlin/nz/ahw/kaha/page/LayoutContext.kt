@@ -15,7 +15,7 @@ import nz.ahw.kaha.RequestContext
 import nz.ahw.kaha.signaling.Signal
 import javax.servlet.http.HttpServletRequest
 
-class LayoutContext(override val request: HttpServletRequest, val appendable: Appendable, val pageContextConsumer: (PageContext) -> Unit): RequestContext() {
+class LayoutContext(override val request: HttpServletRequest, val appendable: Appendable, val pageTitle: String, val pageContextConsumer: (PageContext) -> Unit): RequestContext() {
 
     fun html(body: HTML.() -> Unit) {
         appendable.append("<!DOCTYPE html>")

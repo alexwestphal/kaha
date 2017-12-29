@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServletResponse
 
 abstract class Layout {
 
-    fun apply(request: HttpServletRequest, response: HttpServletResponse, pageContextConsumer: (PageContext) -> Unit) {
+    fun apply(request: HttpServletRequest, response: HttpServletResponse, pageTitle: String, pageContextConsumer: (PageContext) -> Unit) {
         response.writer.use { writer ->
 
-            val layoutContext = LayoutContext(request, writer, pageContextConsumer)
+            val layoutContext = LayoutContext(request, writer, pageTitle, pageContextConsumer)
             try {
                 render(layoutContext)
             } catch (ex: StatusCodeSignal) {
@@ -47,7 +47,7 @@ abstract class Layout {
     }
 }
 
-class EmptyLayout(val pageTitle: String): Layout() {
+object EmptyLayout: Layout() {
     override val render: LayoutRender = {
         html {
             head {
