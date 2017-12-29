@@ -21,20 +21,39 @@ abstract class KahaServlet: HttpServlet() {
 
     open fun put(): Handler = RespondWithErrorCode(404)
 
-    override fun doDelete(req: HttpServletRequest, resp: HttpServletResponse) {
-        delete().apply(req, resp)
+    override fun doDelete(request: HttpServletRequest, response: HttpServletResponse) {
+        errorHandler(request, response) {
+            delete().apply(request, response)
+        }
+
     }
 
-    override fun doGet(req: HttpServletRequest, resp: HttpServletResponse) {
-        get().apply(req, resp)
+    override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
+        errorHandler(request, response) {
+            get().apply(request, response)
+        }
     }
 
-    override fun doPost(req: HttpServletRequest, resp: HttpServletResponse) {
-        post().apply(req, resp)
+    override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
+        errorHandler(request, response) {
+            post().apply(request, response)
+        }
     }
 
-    override fun doPut(req: HttpServletRequest, resp: HttpServletResponse) {
-        put().apply(req, resp)
+    override fun doPut(request: HttpServletRequest, response: HttpServletResponse) {
+        errorHandler(request, response) {
+            put().apply(request, response)
+        }
     }
 
+    private fun errorHandler(request: HttpServletRequest, response: HttpServletResponse, body: () -> Unit) {
+        try {
+            body()
+        } catch(ex: KahaException) {
+            var info = "${request.method} ${request.requestURI}"
+            if(null != request.queryString) info += "?${request.queryString}"
+
+            throw ex.withSource(info)
+        }
+    }
 }

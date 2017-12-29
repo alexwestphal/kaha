@@ -14,7 +14,7 @@ import kotlinx.html.stream.appendHTML
 import nz.ahw.kaha.RequestContext
 import javax.servlet.http.HttpServletRequest
 
-class PageLayoutContext(override val request: HttpServletRequest, val appendable: Appendable, val pageContextConsumer: (PageContext) -> Unit): RequestContext() {
+class LayoutContext(override val request: HttpServletRequest, val appendable: Appendable, val pageContextConsumer: (PageContext) -> Unit): RequestContext() {
 
     fun html(body: HTML.() -> Unit) {
         appendable.append("<!DOCTYPE html>")
@@ -22,6 +22,11 @@ class PageLayoutContext(override val request: HttpServletRequest, val appendable
     }
 
     fun HtmlBlockTag.pageContent() {
-        pageContextConsumer(PageContext(request, this))
+        try {
+            pageContextConsumer(PageContext(request, this))
+        } catch(ex: Throwable) {
+            appendable.append("Error while rendering page")
+            throw PageRenderException(ex)
+        }
     }
 }

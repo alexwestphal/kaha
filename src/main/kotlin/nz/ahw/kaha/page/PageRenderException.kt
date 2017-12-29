@@ -7,13 +7,6 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha.page
 
-import nz.ahw.kaha.Handler
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
+import nz.ahw.kaha.KahaException
 
-class Page(val layout: Layout, val body: PageContext.() -> Unit): Handler {
-    override fun apply(request: HttpServletRequest, response: HttpServletResponse) {
-            layout.apply(request, response, body)
-    }
-
-}
+class PageRenderException(cause: Throwable): KahaException("Error while rendering page", cause)
