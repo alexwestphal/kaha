@@ -7,6 +7,7 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha.page
 
+import nz.ahw.kaha.signaling.StatusCodeSignal
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -18,6 +19,8 @@ abstract class Layout {
             val layoutContext = LayoutContext(request, writer, pageContextConsumer)
             try {
                 render(layoutContext)
+            } catch (ex: StatusCodeSignal) {
+                response.sendError(ex.statusCode, ex.message)
             } catch(ex: PageRenderException) {
                 response.sendError(500)
                 throw ex
