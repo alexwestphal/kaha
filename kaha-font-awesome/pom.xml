@@ -54,7 +54,7 @@
         <repository>
             <id>bintray-ahwnz-kaha</id>
             <name>ahwnz-kaha</name>
-            <url>https://api.bintray.com/maven/ahwnz/kaha/kaha/;publish=1</url>
+            <url>https://api.bintray.com/maven/ahwnz/kaha/kaha-font-awesome/;publish=1</url>
         </repository>
     </distributionManagement>
 </project>
