@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>nz.ahw.kaha</groupId>
+        <artifactId>kaha-root</artifactId>
+        <version>0.1.0</version>
+    </parent>
+
+    <artifactId>kaha-font-awesome</artifactId>
+    <version>0.1.0</version>
+    <packaging>jar</packaging>
+    <name>Kaha Font Awesome Support</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>nz.ahw.kaha</groupId>
+            <artifactId>kaha</artifactId>
+            <version>0.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>4.7.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <plugins>
+            <plugin>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <groupId>org.jetbrains.kotlin</groupId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <repository>
+            <id>bintray-ahwnz-kaha</id>
+            <name>ahwnz-kaha</name>
+            <url>https://api.bintray.com/maven/ahwnz/kaha/kaha/;publish=1</url>
+        </repository>
+    </distributionManagement>
+</project>
