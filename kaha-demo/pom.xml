@@ -5,26 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>nz.ahw.kaha</groupId>
-    <artifactId>kaha-root</artifactId>
+    <artifactId>kaha-demo</artifactId>
     <version>0.1.0</version>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>kaha</module>
-    </modules>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <scm>
-        <url>https://github.com/ahwnz/kaha</url>
-        <connection>scm:git:git@github.com:ahwnz/kaha.git</connection>
-    </scm>
+    <packaging>war</packaging>
+    <name>Kaha Web Framework Demo</name>
 
     <properties>
         <kotlin.version>1.2.0</kotlin.version>
@@ -37,11 +21,15 @@
             <artifactId>kotlin-stdlib</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
+        <dependency>
+            <groupId>nz.ahw.kaha</groupId>
+            <artifactId>kaha</artifactId>
+            <version>0.1.0</version>
+        </dependency>
     </dependencies>
 
     <build>
         <sourceDirectory>src/main/kotlin</sourceDirectory>
-        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
         <plugins>
             <plugin>
                 <artifactId>kotlin-maven-plugin</artifactId>
@@ -62,27 +50,22 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>2.1.2</version>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>1.6</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <webXml>src/main/web/WEB-INF/web.xml</webXml>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/web/</directory>
+                        </resource>
+                    </webResources>
+
+                    <archive>
+                        <manifestEntries>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>
