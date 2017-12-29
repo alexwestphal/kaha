@@ -5,9 +5,15 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha
+package nz.ahw.kaha.page
 
-import kotlinx.html.HtmlBlockTag
+import nz.ahw.kaha.Handler
 import javax.servlet.http.HttpServletRequest
+import javax.servlet.http.HttpServletResponse
 
-class PageContext(override val request: HttpServletRequest, tag: HtmlBlockTag): RequestContext(), HtmlBlockTag by tag
+class Page(val layout: PageLayout, val body: PageContext.() -> Unit): Handler {
+    override fun apply(request: HttpServletRequest, response: HttpServletResponse) {
+        layout.apply(request, response, body)
+    }
+
+}
