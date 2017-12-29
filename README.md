@@ -1,7 +1,7 @@
-Koha - A Kotlin Web Framework
+Kaha - A Kotlin Web Framework
 =============================
 
-Koha is a simple Servlet based web framework for Kotlin.
+Kaha is a simple Servlet based web framework for Kotlin.
 
 ## Hello World
 
@@ -32,70 +32,64 @@ Responds to a GET request with:
 </html>
 ```
 
-## Parameter Access
+## Installation
 
-Request parameters are available through typed accessors
+**Step 1:** Configure to use the Kaha repository (hosted on Bintray).
 
-```kotlin
-    override fun get() = Page(title = "Hello World") {
-        // Note the specified type
-        val userId: Int? = parameters["user_id"]
-        
-        // Or alternatively
-        parameter.getInt("user_id")
-    
-        div("message") {
-            +"Hello World $userId"
-        }
-    }
+For Maven:
+```xml
+<repositories>
+    <repository>
+        <id>bintray-ahwnz-kaha</id>
+        <name>bintray-kaha</name>
+        <url>https://dl.bintray.com/ahwnz/kaha</url>
+    </repository>
+</repositories>
 ```
 
-### Shared Layout
-
-```kotlin
-object SimpleLayout: Layout() {
-
-    override val render: LayoutRender = {
-        html {
-            head {
-                title(pageTitle)
-                script(type = ScriptType.textJavaScript, src = "https://code.jquery.com/jquery-1.12.4.min.js") {}
-            }
-            body {
-                div("header") {  }
-                div("sidebar") {  }
-                div("main") {
-                    // Inject the page into the layout
-                    pageContent()
-                }
-                div("footer") {  }
-            }
-        }
+For Gradle:
+```groovy
+repositories {
+    maven {
+        url  "https://dl.bintray.com/ahwnz/kaha" 
     }
 }
-
-// Using the layout
-override fun get() = Page(SimpleLayout, title = "Some Page") { 
-
-}
 ```
 
-Responds to a GET request with:
+**Step 2:** Add the dependency (where `{version}` is replaced with the desired Kaha version).
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Some Page</title>
-    <script type="text" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-</head>
-<body>
-    <div class="header"></div>
-    <div class="sidebar"></div>
-    <div class="main">
-        <div class="message">Hello World</div>
-    </div>
-    <div class="footer"></div>
-</body> 
-</html>
+For Maven:
+```xml
+<dependencies>
+    <dependency>
+      <groupId>nz.ahw.kaha</groupId>
+      <artifactId>kaha</artifactId>
+      <version>{version}</version>
+    </dependency>
+</dependencies>
 ```
+
+For Gradle
+```groovy
+compile 'nz.ahw.kaha:kaha:{version}'
+```
+
+## Design Goals
+
+Kaha is designed to be a simple way of creating servlets in Kotlin. 
+
+Key Design Goals:
+- Compatible - Fit into an existing Java and/or Kotlin Servlet based web application.
+- DRY - Avoid repetition wherever possible
+- Typesafe - Use typesafe builders so that typos are caught at compile time
+- Customizable - Components should be as customizable as possible
+- Reusable - Components should be as reusable as possible
+- Escapable - Escape hatches should be available  
+
+## Documentation
+
+See the [Documentation](https://github.com/ahwnz/kaha/wiki).
+
+## License
+
+Kaha is available to the public under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
