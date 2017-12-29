@@ -5,9 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>nz.ahw.kaha</groupId>
-    <artifactId>kaha</artifactId>
+    <artifactId>kaha-root</artifactId>
     <version>0.1.0</version>
-    <name>Kaha Web Framework</name>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>kaha</module>
+    </modules>
 
     <licenses>
         <license>
