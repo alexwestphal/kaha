@@ -7,6 +7,7 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha.page
 
+import kotlinx.html.*
 import nz.ahw.kaha.signaling.StatusCodeSignal
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -43,5 +44,18 @@ abstract class Layout {
             override val render: LayoutRender = _render
         }
 
+    }
+}
+
+class EmptyLayout(val pageTitle: String): Layout() {
+    override val render: LayoutRender = {
+        html {
+            head {
+                title(pageTitle)
+            }
+            body {
+                pageContent()
+            }
+        }
     }
 }
