@@ -19,7 +19,7 @@
         <dependency>
             <groupId>nz.ahw.kaha</groupId>
             <artifactId>kaha</artifactId>
-            <version>0.1.1</version>
+            <version>0.1.0</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
@@ -49,12 +49,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>bintray-ahwnz-kaha</id>
-            <name>ahwnz-kaha</name>
-            <url>https://api.bintray.com/maven/ahwnz/kaha/kaha-font-awesome/;publish=1</url>
-        </repository>
-    </distributionManagement>
 </project>
