@@ -5,8 +5,8 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha.page
+package nz.ahw.kaha.layout
 
 import nz.ahw.kaha.KahaException
 
-class PageRenderException(cause: Throwable): KahaException("Error while rendering page", cause)
+class LayoutRenderException(layoutName: String, cause: Throwable): KahaException("Error while rendering layout: $layoutName", cause)

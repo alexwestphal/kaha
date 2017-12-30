@@ -5,8 +5,10 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha.signaling
+package nz.ahw.kaha
 
-open class Signal(message: String): RuntimeException(message) {
-    override fun fillInStackTrace(): Throwable = this
+object Handlers {
+    val NotFoundHandler = Handler {
+        Responses.ErrorCode(404)
+    }
 }

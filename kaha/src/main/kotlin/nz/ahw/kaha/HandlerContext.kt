@@ -8,10 +8,5 @@
 package nz.ahw.kaha
 
 import javax.servlet.http.HttpServletRequest
-import javax.servlet.http.HttpServletResponse
 
-class RespondWithErrorCode(private val errorCode: Int): Handler {
-    override fun apply(request: HttpServletRequest, response: HttpServletResponse) {
-        response.sendError(errorCode)
-    }
-}
+class HandlerContext(override val request: HttpServletRequest): RequestContext()

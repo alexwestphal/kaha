@@ -5,9 +5,6 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha.signaling
+package nz.ahw.kaha
 
-open class StatusCodeSignal(val statusCode: Int, message: String): Signal(message)
-
-
-open class BadRequest(message: String): StatusCodeSignal(400, message)
+class BlockRenderException(cause: Throwable): KahaException("Error while rendering page", cause)

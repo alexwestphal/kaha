@@ -11,38 +11,39 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-abstract class KahaServlet: HttpServlet() {
+abstract class KahaServlet : HttpServlet() {
 
-    open fun delete(): Handler = RespondWithErrorCode(404)
+    open fun delete(): Handler = Handlers.NotFoundHandler
 
-    open fun get(): Handler = RespondWithErrorCode(404)
+    open fun get(): Handler = Handlers.NotFoundHandler
 
-    open fun post(): Handler = RespondWithErrorCode(404)
+    open fun post(): Handler = Handlers.NotFoundHandler
 
-    open fun put(): Handler = RespondWithErrorCode(404)
+    open fun put(): Handler = Handlers.NotFoundHandler
+
 
     override fun doDelete(request: HttpServletRequest, response: HttpServletResponse) {
         errorHandler(request, response) {
-            delete().apply(request, response)
+            delete().handle(request, response)
         }
 
     }
 
     override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
         errorHandler(request, response) {
-            get().apply(request, response)
+            get().handle(request, response)
         }
     }
 
     override fun doPost(request: HttpServletRequest, response: HttpServletResponse) {
         errorHandler(request, response) {
-            post().apply(request, response)
+            post().handle(request, response)
         }
     }
 
     override fun doPut(request: HttpServletRequest, response: HttpServletResponse) {
         errorHandler(request, response) {
-            put().apply(request, response)
+            put().handle(request, response)
         }
     }
 
@@ -57,3 +58,4 @@ abstract class KahaServlet: HttpServlet() {
         }
     }
 }
+
