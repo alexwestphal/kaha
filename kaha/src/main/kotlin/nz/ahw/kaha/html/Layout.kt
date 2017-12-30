@@ -5,8 +5,11 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha.layout
+package nz.ahw.kaha.html
 
-import nz.ahw.kaha.KahaException
+abstract class Layout {
 
-class LayoutRenderException(layoutName: String, cause: Throwable): KahaException("Error while rendering layout: $layoutName", cause)
+    open val layoutName: String = this::class.java.name
+
+    abstract val render: LayoutRender
+}

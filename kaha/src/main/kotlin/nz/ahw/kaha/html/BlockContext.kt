@@ -5,20 +5,8 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha.layout
+package nz.ahw.kaha.html
 
-import kotlinx.html.body
+import kotlinx.html.HtmlBlockTag
 
-object Layouts {
-    object EmptyLayout: Layout() {
-        override val render: LayoutRender = {
-            html {
-                body {
-                    blockContent()
-                }
-            }
-
-        }
-    }
-}
-
+class BlockContext(tag: HtmlBlockTag): HtmlBlockTag by tag

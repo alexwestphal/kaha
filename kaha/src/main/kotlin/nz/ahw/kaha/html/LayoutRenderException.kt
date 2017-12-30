@@ -5,6 +5,8 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha.layout
+package nz.ahw.kaha.html
 
-typealias LayoutRender = LayoutContext.() -> Unit
+import nz.ahw.kaha.KahaException
+
+class LayoutRenderException(layoutName: String, cause: Throwable): KahaException("Error while rendering layout: $layoutName", cause)

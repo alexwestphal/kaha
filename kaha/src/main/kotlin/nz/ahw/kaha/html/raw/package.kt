@@ -5,7 +5,7 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha.raw
+package nz.ahw.kaha.html.raw
 
 import kotlinx.html.*
 import org.intellij.lang.annotations.Language

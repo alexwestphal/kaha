@@ -5,6 +5,20 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha
+package nz.ahw.kaha.html
 
-class BlockRenderException(cause: Throwable): KahaException("Error while rendering page", cause)
+import kotlinx.html.body
+
+object Layouts {
+    object EmptyLayout: Layout() {
+        override val render: LayoutRender = {
+            html {
+                body {
+                    blockContent()
+                }
+            }
+
+        }
+    }
+}
+
