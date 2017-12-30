@@ -5,17 +5,17 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha
+package nz.ahw.kaha.signal
 
-open class KahaException: RuntimeException {
+import nz.ahw.kaha.Response
+import javax.servlet.http.HttpServletResponse
 
-    constructor(message: String): super(message)
+open class Signal(val response: Response): RuntimeException() {
 
-    constructor(cause: Throwable): super(cause)
+    override fun fillInStackTrace(): Throwable = this
 
-    constructor(message: String, cause: Throwable): super(message, cause)
-
-    fun withSource(source: String): KahaException {
-        return KahaException("$message [$source]", cause!!)
+    companion object {
+        operator fun invoke(response: (HttpServletResponse) -> Unit): Signal = Signal(response)
     }
 }
+

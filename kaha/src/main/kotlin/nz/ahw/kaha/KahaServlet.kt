@@ -54,7 +54,7 @@ abstract class KahaServlet : HttpServlet() {
             var info = "${request.method} ${request.requestURI}"
             if(null != request.queryString) info += "?${request.queryString}"
 
-            throw ex.withSource(info)
+            throw KahaException("Failure serving request $info", ex)
         }
     }
 }

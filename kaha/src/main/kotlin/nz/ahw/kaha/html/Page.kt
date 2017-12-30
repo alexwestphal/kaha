@@ -8,6 +8,7 @@
 package nz.ahw.kaha.html
 
 import nz.ahw.kaha.Response
+import nz.ahw.kaha.signal.Signal
 import javax.servlet.http.HttpServletResponse
 
 class Page(val layout: Layout, val block: Block): Response {
@@ -18,9 +19,12 @@ class Page(val layout: Layout, val block: Block): Response {
             val layoutContext = LayoutContext(writer, block)
             try {
                 layout.render(layoutContext)
+            } catch (signal: Signal) {
+                throw signal
             } catch(ex: BlockRenderException) {
                 throw ex
             } catch(ex: Throwable) {
+                print("Page catch ex: $ex")
                 throw LayoutRenderException(layout.layoutName, ex)
             }
         }

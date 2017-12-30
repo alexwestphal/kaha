@@ -11,6 +11,7 @@ import kotlinx.html.HTML
 import kotlinx.html.HtmlBlockTag
 import kotlinx.html.html
 import kotlinx.html.stream.appendHTML
+import nz.ahw.kaha.signal.Signal
 
 class LayoutContext(val appendable: Appendable, val block: Block) {
 
@@ -22,6 +23,8 @@ class LayoutContext(val appendable: Appendable, val block: Block) {
     fun HtmlBlockTag.blockContent() {
         try {
             block(BlockContext(this))
+        } catch (signal: Signal) {
+            throw signal
         } catch(ex: Throwable) {
             throw BlockRenderException(ex)
         }

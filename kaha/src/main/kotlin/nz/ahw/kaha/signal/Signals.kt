@@ -5,17 +5,13 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha
+package nz.ahw.kaha.signal
 
-open class KahaException: RuntimeException {
+import nz.ahw.kaha.Responses
 
-    constructor(message: String): super(message)
+object Signals {
 
-    constructor(cause: Throwable): super(cause)
+    open class ErrorCode(errorCode: Int, message: String? = null): Signal(Responses.ErrorCode(errorCode, message))
 
-    constructor(message: String, cause: Throwable): super(message, cause)
-
-    fun withSource(source: String): KahaException {
-        return KahaException("$message [$source]", cause!!)
-    }
+    class BadRequest(message: String): ErrorCode(400, message)
 }
