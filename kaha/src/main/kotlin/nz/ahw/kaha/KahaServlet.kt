@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse
 
 abstract class KahaServlet : HttpServlet() {
 
-    open fun delete(): Handler = Handlers.NotFoundHandler
+    open fun delete(): Handler = Handlers.NotFound
 
-    open fun get(): Handler = Handlers.NotFoundHandler
+    open fun get(): Handler = Handlers.NotFound
 
-    open fun post(): Handler = Handlers.NotFoundHandler
+    open fun post(): Handler = Handlers.NotFound
 
-    open fun put(): Handler = Handlers.NotFoundHandler
+    open fun put(): Handler = Handlers.NotFound
 
 
     override fun doDelete(request: HttpServletRequest, response: HttpServletResponse) {

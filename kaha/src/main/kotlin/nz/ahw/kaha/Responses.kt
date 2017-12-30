@@ -14,11 +14,16 @@ object Responses {
         override fun apply(httpServletResponse: HttpServletResponse) {}
     }
 
-    data class ErrorCode(private val errorCode: Int): Response {
+    open class ErrorCode(private val errorCode: Int, private val message: String?): Response {
         override fun apply(httpServletResponse: HttpServletResponse) {
-            httpServletResponse.sendError(errorCode)
+            if(null == message) httpServletResponse.sendError(errorCode)
+            else httpServletResponse.sendError(errorCode, message)
         }
-
     }
+
+    class BadRequest(message: String): ErrorCode(400, message)
+
+    object NotFound: ErrorCode(404, null)
+
 }
 
