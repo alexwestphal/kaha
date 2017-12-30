@@ -15,9 +15,11 @@ Kaha is a simple Servlet based web framework for Kotlin.
 @WebServlet("/hello")
 class HelloWorld: KahaServlet() {
 
-    override fun get() = Page(title = "Hello World") {
-        div("message") {
-            +"Hello World"
+    override fun get() = Handler {
+        Layouts.EmptyLayout.renderBlock {
+            div("message") {
+                +"Hello World"
+            }
         }
     }
 }
