@@ -18,7 +18,7 @@ abstract class Layout {
 
     abstract val render: LayoutRender
 
-    operator fun invoke(block: Block): Response = object: Response {
+    fun renderBlock(block: Block): Response = object: Response {
 
         override fun apply(httpServletResponse: HttpServletResponse) {
             httpServletResponse.writer.use { writer ->
