@@ -9,7 +9,7 @@ package nz.ahw.kaha
 
 import javax.servlet.http.HttpServletRequest
 
-class HandlerContext(val request: HttpServletRequest): RequestContext() {
+class HandlerContext(val request: HttpServletRequest) {
 
     val parameters = Parameters()
 
