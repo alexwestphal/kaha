@@ -24,6 +24,7 @@ class LayoutContext(val appendable: Appendable, val block: Block) {
         try {
             block(BlockContext(this.consumer))
         } catch (signal: Signal) {
+            // Signals aren't allowed to happen here but we're rethrowing it for Handler to deal with
             throw signal
         } catch(ex: Throwable) {
             throw BlockRenderException(ex)
