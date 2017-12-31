@@ -27,7 +27,152 @@ Responds to a GET request with:
 <div class="message">Hello World</div>
 ```
 
-## Concepts 
+
+## Key Principles
+
+### Compatible
+
+Kaha can be added to any existing Servlet based Web Application. Your Servlet just inherits from `KahaServlet` rather than `HttpServlet`. You can even mix between Kaha and direct servlet usage:
+
+```kotlin
+@WebServlet("/my-servlet")
+class MyServlet: KahaServlet() {
+    override fun post() = Handler {
+        // Response to POST request using Kaha
+    }
+    
+    override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
+        // Response to GET request using other techniques
+    }
+}
+```
+
+### Concise
+
+Kaha provides concise typed ways of doing many of things.
+
+- Accessing Request parameters:
+
+```kotlin
+override fun get() = Handler {
+    val userId: Int = parameters["userId"]
+    ...
+}
+```
+
+- Sending Error Codes
+
+```kotlin
+override fun get() = Handler {
+    Responses.ImATeaPot
+}
+```
+
+### DRY (Don't Repeat Yourself)
+
+Kaha provides `Layout` as a way to centralise the container style HTML that is commonly shared across pages.
+
+```kotlin
+// Defining a layout
+class SimpleLayout(pageTitle: String): Layout() {
+    override val render: LayoutRender = {
+        html {
+            head {
+                title(pageTitle)
+            }
+            body {
+                div("header") {
+                    h1 { +pageTitle }
+                }
+                div("sidebar") {}
+                div("main") {
+                    // Inject the page block
+                    blockContent()
+                }
+                div("footer") {}
+                script( type = ScriptType.textJavaScript, 
+                        src = "https://code.jquery.com/jquery-1.12.4.min.js") {}
+            }
+        }
+    }
+}
+
+// Using a layout
+@WebServlet("/hello")
+class HelloWorld: KahaServlet() {
+    override fun get() = Handler {
+        val message = "Hello World"
+        Page(SimpleLayout(pageTitle = message)) {
+            div("message") {
+                +message
+            }
+        }
+    }
+}
+```
+
+### Typesafe
+
+Kaha utilises the [kotlinx.html](https://github.com/Kotlin/kotlinx.html) DSL for building. This helps catch alot of typos and mistakes at compile time. For example:
+
+```kotlin
+Fragment {
+    div { span { +"Hi" } } // Produces <div><span>Hi</span></div>
+    
+    div { sapn { +"Hi" } } // Doesn't Compile 
+}
+```
+
+### Reusable
+
+Writing reusable blocks is easy:
+
+```kotlin
+fun HtmlBlockTag.sayHello(name: String) {
+    span("greeting") { +"Hello $name!" }  
+}
+
+// Using it
+Fragment {
+    div {
+        sayHello("Alice")
+    }
+}
+```
+
+We can also create resuable parameter extractors:
+
+```kotlin
+// Define that userId (if requested) should be an Int otherwise a 400 - Bad Request error is sent
+val HandlerContext.Parameters.userId: Int get() = this["user_id"] ?: throw Signals.BadRequest("Invalid or missing user_id")
+
+
+override fun get() = Handler {
+    lookupUserData(parameters.userId)
+    ...
+}
+```
+
+### Escapable
+
+Kaha makes it easy to escape from the DSL and produce raw output.
+
+```kotlin
+Fragment {
+    div { 
+        rawHtml("""
+            <h1>Page Title</h1>
+        """) 
+    }
+    
+    rawScript("""
+        $(document).ready(function() {
+            $(".message").css({color: 'red'});
+        })
+    """)
+}
+```
+
 
 ## Installation
 
@@ -71,21 +216,10 @@ For Gradle
 compile 'nz.ahw.kaha:kaha:{version}'
 ```
 
-## Design Goals
-
-Kaha is designed to be a simple way of creating servlets in Kotlin. 
-
-Key Design Goals:
-- Compatible - Fit into an existing Java and/or Kotlin Servlet based web application.
-- DRY - Avoid repetition wherever possible
-- Typesafe - Use typesafe builders so that typos are caught at compile time
-- Customizable - Components should be as customizable as possible
-- Reusable - Components should be as reusable as possible
-- Escapable - Escape hatches should be available  
-
 ## Documentation
 
 See the [Documentation](https://github.com/ahwnz/kaha/wiki).
+
 
 ## License
 
