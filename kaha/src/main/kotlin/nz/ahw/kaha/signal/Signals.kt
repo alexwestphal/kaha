@@ -11,7 +11,7 @@ import nz.ahw.kaha.Responses
 
 object Signals {
 
-    open class ErrorCode(errorCode: Int, message: String? = null): Signal(Responses.ErrorCode(errorCode, message))
+    open class StatusCode(errorCode: Int, message: String? = null): Signal(Responses.StatusCode(errorCode, message))
 
-    class BadRequest(message: String): ErrorCode(400, message)
+    class BadRequest(message: String): StatusCode(400, message)
 }
