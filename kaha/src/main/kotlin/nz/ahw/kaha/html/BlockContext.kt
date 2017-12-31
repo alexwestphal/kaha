@@ -7,6 +7,6 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha.html
 
-import kotlinx.html.HtmlBlockTag
+import kotlinx.html.TagConsumer
 
-class BlockContext(tag: HtmlBlockTag): HtmlBlockTag by tag
+class BlockContext<out T>(consumer: TagConsumer<T>): TagConsumer<T> by consumer

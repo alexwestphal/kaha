@@ -14,13 +14,13 @@ fun HTMLTag.rawHtml(@Language("HTML") html: String) {
     unsafe { raw(html) }
 }
 
-fun FlowOrPhrasingOrMetaDataContent.rawScript(@Language("JavaScript") javaScript: String) {
+fun <T, C: TagConsumer<T>> C.rawScript(@Language("JavaScript") javaScript: String) {
     script(type = ScriptType.textJavaScript) {
         unsafe { raw(javaScript) }
     }
 }
 
-fun FlowOrMetaDataContent.rawStyle(@Language("CSS") css: String) {
+fun <T, C: TagConsumer<T>> C.rawStyle(@Language("CSS") css: String) {
     style(type = StyleType.textCss) {
         unsafe { raw(css) }
     }

@@ -22,7 +22,7 @@ class LayoutContext(val appendable: Appendable, val block: Block) {
 
     fun HtmlBlockTag.blockContent() {
         try {
-            block(BlockContext(this))
+            block(BlockContext(this.consumer))
         } catch (signal: Signal) {
             throw signal
         } catch(ex: Throwable) {

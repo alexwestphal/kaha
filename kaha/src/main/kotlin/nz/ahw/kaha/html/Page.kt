@@ -20,6 +20,7 @@ class Page(val layout: Layout, val block: Block): Response {
             try {
                 layout.render(layoutContext)
             } catch (signal: Signal) {
+                // Signals aren't allowed to happen here but we're rethrowing it for Handler to deal with
                 throw signal
             } catch(ex: BlockRenderException) {
                 throw ex
