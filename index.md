@@ -220,10 +220,6 @@ compile 'nz.ahw.kaha:kaha:{version}'
 
 In New Zealand Maori, 'kaha' is a adverb that translates as "be strong". It's commonly used as "Kia Kaha" ("Stay Strong").
 
-## Documentation
-
-See the [Documentation](https://github.com/ahwnz/kaha/wiki).
-
 
 ## License
 
