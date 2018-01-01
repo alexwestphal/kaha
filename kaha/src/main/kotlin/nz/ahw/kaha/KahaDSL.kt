@@ -7,8 +7,5 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha
 
-object Handlers {
-    val NotFound = Handler {
-        Responses.NotFound()
-    }
-}
+@DslMarker
+annotation class KahaDSL

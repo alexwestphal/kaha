@@ -9,6 +9,7 @@ package nz.ahw.kaha
 
 import javax.servlet.http.HttpServletRequest
 
+@KahaDSL
 class HandlerContext(val request: HttpServletRequest) {
 
     val parameters = Parameters()
