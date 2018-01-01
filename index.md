@@ -144,7 +144,7 @@ We can also create resuable parameter extractors:
 
 ```kotlin
 // Define that userId (if requested) should be an Int otherwise a 400 - Bad Request error is sent
-val HandlerContext.Parameters.userId: Int get() = this["user_id"] ?: throw Signals.BadRequest("Invalid or missing user_id")
+val HandlerContext.Parameters.userId: Int get() = require("user_id", errorMessage = "Invalid or missing user_id")
 
 
 override fun get() = Handler {
