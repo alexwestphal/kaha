@@ -12,7 +12,7 @@ import kotlinx.html.HtmlBlockTag
 import kotlinx.html.html
 import kotlinx.html.stream.appendHTML
 import nz.ahw.kaha.KahaDSL
-import nz.ahw.kaha.signal.Signal
+import nz.ahw.kaha.Signal
 
 @KahaDSL
 class LayoutContext(val appendable: Appendable, val block: Block) {

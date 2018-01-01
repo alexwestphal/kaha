@@ -5,12 +5,11 @@
 **        https://github.com/ahwnz/kaha        **
 **                                             **
 \*---------------------------------------------*/
-package nz.ahw.kaha.signal
+package nz.ahw.kaha
 
-import nz.ahw.kaha.Response
 import javax.servlet.http.HttpServletResponse
 
-open class Signal(val response: Response): RuntimeException() {
+class Signal(val response: Response): RuntimeException() {
 
     override fun fillInStackTrace(): Throwable = this
 
@@ -19,3 +18,4 @@ open class Signal(val response: Response): RuntimeException() {
     }
 }
 
+class InvalidSignalLocationException(signal: Signal): KahaException("A Signal can't be sent within a response. Offending Signal: $signal")

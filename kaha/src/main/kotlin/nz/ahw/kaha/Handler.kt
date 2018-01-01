@@ -7,8 +7,6 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha
 
-import nz.ahw.kaha.signal.InvalidSignalLocationException
-import nz.ahw.kaha.signal.Signal
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 

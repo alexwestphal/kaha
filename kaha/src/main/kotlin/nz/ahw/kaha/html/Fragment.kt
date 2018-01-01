@@ -9,7 +9,7 @@ package nz.ahw.kaha.html
 
 import kotlinx.html.stream.appendHTML
 import nz.ahw.kaha.Response
-import nz.ahw.kaha.signal.Signal
+import nz.ahw.kaha.Signal
 import javax.servlet.http.HttpServletResponse
 
 class Fragment(val block: Block): Response {

@@ -8,7 +8,7 @@
 package nz.ahw.kaha.html
 
 import nz.ahw.kaha.Response
-import nz.ahw.kaha.signal.Signal
+import nz.ahw.kaha.Signal
 import javax.servlet.http.HttpServletResponse
 
 class Page(val layout: Layout, val block: Block): Response {
