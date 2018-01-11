@@ -8,6 +8,7 @@
 package nz.ahw.kaha
 
 import javax.servlet.http.HttpServletRequest
+import kotlin.reflect.KClass
 
 @KahaDSL
 class HandlerContext(val request: HttpServletRequest) {
@@ -18,13 +19,16 @@ class HandlerContext(val request: HttpServletRequest) {
 
     class Parameters(val context: HandlerContext) {
 
-        operator inline fun <reified T> get(name: String): T? = when(T::class) {
-            Boolean::class -> getBoolean(name) as T
-            Double::class -> getDouble(name) as T
-            Int::class -> getInt(name) as T
-            Long::class -> getLong(name) as T
-            String::class -> getString(name) as T
-            else -> throw IllegalArgumentException("Can't extract '${T::class.java.name}' from a parameter")
+        operator inline fun <reified T: Any> get(name: String): T? = get(name, T::class)
+
+        @Suppress("UNCHECKED_CAST")
+        fun <T: Any> get(name: String, cls: KClass<T>): T? = when(cls) {
+            Boolean::class -> getBoolean(name) as T?
+            Double::class -> getDouble(name) as T?
+            Int::class -> getInt(name) as T?
+            Long::class -> getLong(name) as T?
+            String::class -> getString(name) as T?
+            else -> throw IllegalArgumentException("Can't extract '${cls.java.name}' from a parameter")
         }
 
         fun getBoolean(name: String): Boolean? = context.request.getParameter(name)?.toBoolean()
@@ -33,6 +37,8 @@ class HandlerContext(val request: HttpServletRequest) {
         fun getLong(name: String): Long? = context.request.getParameter(name)?.toLongOrNull()
         fun getString(name: String): String? = context.request.getParameter(name)
 
-        inline fun <reified T> require(name: String, errorMessage: String): T = get(name) ?: context.signal(Responses.BadRequest(errorMessage))
+        inline fun <reified T: Any> require(name: String, errorMessage: String): T = require(name, T::class, errorMessage)
+
+        fun <T: Any> require(name: String, cls: KClass<T>, errorMessage: String): T = get(name, cls) ?: context.signal(Responses.BadRequest(errorMessage))
     }
 }

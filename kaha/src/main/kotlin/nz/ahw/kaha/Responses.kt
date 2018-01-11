@@ -40,7 +40,7 @@ object Responses {
 
     // 4xx Client Errors
 
-    abstract class ClientError(statusCode: Int, message: String?): StatusCode(statusCode)
+    abstract class ClientError(statusCode: Int, message: String?): StatusCode(statusCode, message)
 
     class BadRequest(message: String? = null): ClientError(400, message)
     class NotFound(message: String? = null): StatusCode(404, message)
