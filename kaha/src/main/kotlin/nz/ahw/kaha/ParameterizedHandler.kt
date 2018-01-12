@@ -16,18 +16,14 @@ data class Parameter<T: Any>(val name: String, val type: KClass<T>)
 class ParameterizedHandler1<P1: Any>(val p1: Parameter<P1>, private val body: HandlerContext.(P1) -> Response): KahaHandler({
     val p1Value = parameters.require(p1.name, p1.type, "Missing or invalid parameter '${p1.name}'")
     body(p1Value)
-}) {
-    fun queryString(p1Value: P1): String = "?${p1.name}=$p1Value"
-}
+})
 
 
 class ParameterizedHandler2<P1: Any, P2: Any>(val p1: Parameter<P1>, val p2: Parameter<P2>, private val body: HandlerContext.(P1, P2) -> Response): KahaHandler({
     val p1Value = parameters.require(p1.name, p1.type, "Missing or invalid parameter '${p1.name}'")
     val p2Value = parameters.require(p2.name, p2.type, "Missing or invalid parameter '${p2.name}'")
     body(p1Value, p2Value)
-}) {
-    fun queryString(p1Value: P1): String = "?${p1.name}=$p1Value"
-}
+})
 
 
 inline fun <reified P1: Any> KahaServlet.Handler(noinline body: HandlerContext.(P1) -> Response): ParameterizedHandler1<P1> {

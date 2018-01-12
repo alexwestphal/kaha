@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-abstract class KahaServlet : HttpServlet() {
+abstract class KahaServlet: HttpServlet() {
 
     open fun delete(): KahaHandler = Handlers.NotFound
 
@@ -21,12 +21,10 @@ abstract class KahaServlet : HttpServlet() {
 
     open fun put(): KahaHandler = Handlers.NotFound
 
-
     override fun doDelete(request: HttpServletRequest, response: HttpServletResponse) {
         errorHandler(request, response) {
             delete().handle(request, response)
         }
-
     }
 
     override fun doGet(request: HttpServletRequest, response: HttpServletResponse) {
