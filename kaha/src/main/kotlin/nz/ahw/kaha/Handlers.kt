@@ -8,7 +8,7 @@
 package nz.ahw.kaha
 
 object Handlers {
-    val NotFound = RequestHandler {
+    val NotFound = KahaHandler {
         Responses.NotFound()
     }
 }
