@@ -7,6 +7,12 @@ Kaha is a simple Servlet based web framework for Kotlin.
 [ ![Kotlin](https://img.shields.io/badge/Kotlin-1.2-orange.svg) ](https://kotlinlang.org/)
 [ ![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-green.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
+<nav>
+    <a href="docs/install.html">Install</a>
+    <a href="docs/concepts.html">Concepts</a>
+    <a href="docs/concepts.html">Building HTML</a>
+    <a href="docs/concepts.html">Extensions</a>
+</nav>
 
 ## Hello World
 
