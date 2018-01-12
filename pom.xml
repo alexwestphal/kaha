@@ -6,7 +6,7 @@
 
     <groupId>nz.ahw.kaha</groupId>
     <artifactId>kaha-root</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.3</version>
     <packaging>pom</packaging>
 
     <modules>

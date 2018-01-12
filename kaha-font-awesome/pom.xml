@@ -7,11 +7,11 @@
     <parent>
         <groupId>nz.ahw.kaha</groupId>
         <artifactId>kaha-root</artifactId>
-        <version>0.2.2</version>
+        <version>0.2.3</version>
     </parent>
 
     <artifactId>kaha-font-awesome</artifactId>
-    <version>0.2.2</version>
+    <version>0.2.3</version>
     <packaging>jar</packaging>
     <name>Kaha Font Awesome Support</name>
 
