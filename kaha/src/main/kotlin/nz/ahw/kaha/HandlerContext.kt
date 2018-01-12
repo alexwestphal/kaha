@@ -7,6 +7,8 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha
 
+import nz.ahw.kaha.http.StatusCode
+import nz.ahw.kaha.http.StatusCodes
 import javax.servlet.http.HttpServletRequest
 import kotlin.reflect.KClass
 
@@ -39,6 +41,6 @@ class HandlerContext(val request: HttpServletRequest) {
 
         inline fun <reified T: Any> require(name: String, errorMessage: String): T = require(name, T::class, errorMessage)
 
-        fun <T: Any> require(name: String, cls: KClass<T>, errorMessage: String): T = get(name, cls) ?: context.signal(Responses.BadRequest(errorMessage))
+        fun <T: Any> require(name: String, cls: KClass<T>, errorMessage: String): T = get(name, cls) ?: context.signal(Responses.WithStatusCode(StatusCodes.BadRequest, errorMessage))
     }
 }

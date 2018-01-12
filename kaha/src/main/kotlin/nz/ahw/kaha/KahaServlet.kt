@@ -55,5 +55,16 @@ abstract class KahaServlet: HttpServlet() {
             throw KahaException("Failure serving request $info", ex)
         }
     }
+
+    inline fun <reified S: KahaServlet> urlTo(): String {
+        val base = servletContext.contextPath
+        val registrations = servletContext.servletRegistrations
+        val name = S::class.java.name
+
+        val path = registrations[name]?.mappings?.first()
+        if(null == path || '*' in path) throw IllegalArgumentException("Can't get URL for $name")
+
+        return "$base$path"
+    }
 }
 
