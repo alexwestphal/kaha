@@ -246,6 +246,9 @@ header li.button:hover {
   background:-ms-linear-gradient(top, #C3001D 0%, #950119 100%);
   background:linear-gradient(top, #C3001D 0%, #950119 100%)
 }
+nav a {
+  padding: 10px;
+}
 a.button {
   -webkit-font-smoothing:antialiased;
   background:url(../images/arrow-down.png) no-repeat;
