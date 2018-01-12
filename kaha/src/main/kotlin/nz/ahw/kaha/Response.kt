@@ -7,6 +7,7 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha
 
+import nz.ahw.kaha.http.StatusCode
 import javax.servlet.http.HttpServletResponse
 
 interface Response {
@@ -14,3 +15,5 @@ interface Response {
     fun apply(httpServletResponse: HttpServletResponse)
 
 }
+
+fun Response(statusCode: StatusCode, message: String = statusCode.defaultMessage) = Responses.WithStatusCode(statusCode, message)

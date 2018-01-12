@@ -7,8 +7,10 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha
 
+import nz.ahw.kaha.http.StatusCodes
+
 object Handlers {
     val NotFound = KahaHandler {
-        Responses.NotFound()
+        Response(StatusCodes.NotFound)
     }
 }

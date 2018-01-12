@@ -7,6 +7,7 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha
 
+import nz.ahw.kaha.http.StatusCode
 import javax.servlet.http.HttpServletResponse
 
 object Responses {
@@ -14,41 +15,10 @@ object Responses {
         override fun apply(httpServletResponse: HttpServletResponse) {}
     }
 
-    open class StatusCode(private val statusCode: Int, private val message: String? = null): Response {
+    open class WithStatusCode(private val statusCode: StatusCode, private val message: String = statusCode.defaultMessage): Response {
         override fun apply(httpServletResponse: HttpServletResponse) {
-            if(null == message) httpServletResponse.sendError(statusCode)
-            else httpServletResponse.sendError(statusCode, message)
+            httpServletResponse.sendError(statusCode.value, message)
         }
     }
-
-
-
-    // 2xx Success
-
-    abstract class Success(statusCode: Int): StatusCode(statusCode)
-
-    object OK: Success(200)
-    object Created: Success(201)
-    object Accepted: Success(202)
-    object NonAuthoritativeInformation: Success(203)
-    object NoContent: Success(204)
-    object ResetContent: Success(205)
-
-    // 3xx Redirection
-
-    abstract class Redirection(statusCode: Int): StatusCode(statusCode)
-
-    // 4xx Client Errors
-
-    abstract class ClientError(statusCode: Int, message: String?): StatusCode(statusCode, message)
-
-    class BadRequest(message: String? = null): ClientError(400, message)
-    class NotFound(message: String? = null): StatusCode(404, message)
-
-
-    // 5xx Server Errors
-
-    abstract class ServerError(statusCode: Int): StatusCode(statusCode)
-
 }
 
