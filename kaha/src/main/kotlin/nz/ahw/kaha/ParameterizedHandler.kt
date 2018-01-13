@@ -14,20 +14,20 @@ data class Parameter<T: Any>(val name: String, val type: KClass<T>)
 
 
 class ParameterizedHandler1<P1: Any>(val p1: Parameter<P1>,
-                                     private val body: HandlerContext.(P1) -> Response): KahaHandler({
+                                     private val body: HandlerContext.(P1) -> Response): Handler({
     val p1Value = parameters.require(p1.name, p1.type, "Missing or invalid parameter '${p1.name}'")
     body(p1Value)
 })
 
 class ParameterizedHandler2<P1: Any, P2: Any>(val p1: Parameter<P1>, val p2: Parameter<P2>,
-                                              private val body: HandlerContext.(P1, P2) -> Response): KahaHandler({
+                                              private val body: HandlerContext.(P1, P2) -> Response): Handler({
     val p1Value = parameters.require(p1.name, p1.type, "Missing or invalid parameter '${p1.name}'")
     val p2Value = parameters.require(p2.name, p2.type, "Missing or invalid parameter '${p2.name}'")
     body(p1Value, p2Value)
 })
 
 class ParameterizedHandler3<P1: Any, P2: Any, P3: Any>(val p1: Parameter<P1>, val p2: Parameter<P2>, val p3: Parameter<P3>,
-                                                       private val body: HandlerContext.(P1, P2, P3) -> Response):KahaHandler({
+                                                       private val body: HandlerContext.(P1, P2, P3) -> Response): Handler({
     val p1Value = parameters.require(p1.name, p1.type, "Missing or invalid parameter '${p1.name}'")
     val p2Value = parameters.require(p2.name, p2.type, "Missing or invalid parameter '${p2.name}'")
     val p3Value = parameters.require(p3.name, p3.type, "Missing or invalid parameter '${p3.name}'")
@@ -36,7 +36,7 @@ class ParameterizedHandler3<P1: Any, P2: Any, P3: Any>(val p1: Parameter<P1>, va
 
 class ParameterizedHandler4<P1: Any, P2: Any, P3: Any, P4: Any>(val p1: Parameter<P1>, val p2: Parameter<P2>,
                                                                 val p3: Parameter<P3>, val p4: Parameter<P4>,
-                                                                private val body: HandlerContext.(P1, P2, P3, P4) -> Response):KahaHandler({
+                                                                private val body: HandlerContext.(P1, P2, P3, P4) -> Response): Handler({
     val p1Value = parameters.require(p1.name, p1.type, "Missing or invalid parameter '${p1.name}'")
     val p2Value = parameters.require(p2.name, p2.type, "Missing or invalid parameter '${p2.name}'")
     val p3Value = parameters.require(p3.name, p3.type, "Missing or invalid parameter '${p3.name}'")

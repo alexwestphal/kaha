@@ -10,7 +10,7 @@ package nz.ahw.kaha
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-open class KahaHandler(private val body: HandlerContext.() -> Response) {
+open class Handler(private val body: HandlerContext.() -> Response) {
 
     fun handle(req: HttpServletRequest, resp: HttpServletResponse) {
         val response = try {
@@ -29,4 +29,6 @@ open class KahaHandler(private val body: HandlerContext.() -> Response) {
     }
 }
 
-fun KahaServlet.Handler(body: HandlerContext.() -> Response): KahaHandler = KahaHandler(body)
+private typealias H = Handler
+
+fun KahaServlet.Handler(body: HandlerContext.() -> Response): Handler = H(body)

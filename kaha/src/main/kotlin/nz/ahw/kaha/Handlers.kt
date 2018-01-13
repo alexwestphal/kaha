@@ -10,7 +10,7 @@ package nz.ahw.kaha
 import nz.ahw.kaha.http.StatusCodes
 
 object Handlers {
-    val NotFound = KahaHandler {
+    val NotFound = Handler {
         Response(StatusCodes.NotFound)
     }
 }
