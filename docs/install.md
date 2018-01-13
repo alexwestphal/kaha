@@ -1,5 +1,4 @@
- Installation
- ============
+## Install
 
 **Step 1:** Configure to use the Kaha repository (hosted on Bintray).
 
