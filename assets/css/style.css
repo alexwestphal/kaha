@@ -246,6 +246,14 @@ header li.button:hover {
   background:-ms-linear-gradient(top, #C3001D 0%, #950119 100%);
   background:linear-gradient(top, #C3001D 0%, #950119 100%)
 }
+div.badges {
+  display: flex;
+  justify-content: center;
+}
+div.badges img {
+  margin: 5px 0;
+  border: none;
+}
 nav {
   display: flex;
   justify-content: center;
@@ -263,7 +271,14 @@ a.button {
 }
 a.github { background:url(../images/octocat-small.png) no-repeat 1px}
 a.buttons:hover{ color:#fff;text-decoration:none }
-section{width:650px;float:right;padding-bottom:50px}
+section {
+  width:650px;
+  float:right;
+  padding-bottom:50px;
+}
+section h1 {
+ text-align: center; 
+}
 footer{width:170px;float:left;position:fixed;bottom:10px;padding-left:50px}
 
 @media print, screen and (max-width: 960px){
