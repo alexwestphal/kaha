@@ -251,7 +251,7 @@ div.badges {
   justify-content: center;
 }
 div.badges img {
-  margin: 5px 0;
+  margin: none;
   border: none;
 }
 nav {
