@@ -1,6 +1,4 @@
 
-Kaha is a simple Servlet based web framework for Kotlin.
-
 ## Hello World
 
 ```kotlin
