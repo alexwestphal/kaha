@@ -45,9 +45,8 @@ Kaha provides concise typed ways of doing many of things.
 - Accessing Request parameters:
 
 ```kotlin
-override fun get() = Handler {
-    val userId: Int = parameters["userId"]
-    ...
+override fun get() = Handler { userId: Int ->
+
 }
 ```
 
@@ -55,7 +54,7 @@ override fun get() = Handler {
 
 ```kotlin
 override fun get() = Handler {
-    Responses.ImATeaPot
+    Response(StatusCodes.ImATeapot)
 }
 ```
 
@@ -131,19 +130,6 @@ Fragment {
 }
 ```
 
-We can also create resuable parameter extractors:
-
-```kotlin
-// Define that userId (if requested) should be an Int otherwise a 400 - Bad Request error is sent
-val HandlerContext.Parameters.userId: Int get() = require("user_id", errorMessage = "Invalid or missing user_id")
-
-
-override fun get() = Handler {
-    lookupUserData(parameters.userId)
-    ...
-}
-```
-
 ### Escapable
 
 Kaha makes it easy to escape from the DSL and produce raw output.
@@ -164,48 +150,9 @@ Fragment {
 }
 ```
 
+## Motivation
 
-## Installation
-
-**Step 1:** Configure to use the Kaha repository (hosted on Bintray).
-
-For Maven:
-```xml
-<repositories>
-    <repository>
-        <id>bintray-ahwnz-kaha</id>
-        <name>bintray-kaha</name>
-        <url>https://dl.bintray.com/ahwnz/kaha</url>
-    </repository>
-</repositories>
-```
-
-For Gradle:
-```groovy
-repositories {
-    maven {
-        url  "https://dl.bintray.com/ahwnz/kaha" 
-    }
-}
-```
-
-**Step 2:** Add the dependency (where `{version}` is replaced with the desired Kaha version).
-
-For Maven:
-```xml
-<dependencies>
-    <dependency>
-      <groupId>nz.ahw.kaha</groupId>
-      <artifactId>kaha</artifactId>
-      <version>{version}</version>
-    </dependency>
-</dependencies>
-```
-
-For Gradle
-```groovy
-compile 'nz.ahw.kaha:kaha:{version}'
-```
+TODO
 
 ## Etymology
 
