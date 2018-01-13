@@ -248,6 +248,7 @@ header li.button:hover {
 }
 div.badges {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 div.badges img {
@@ -256,6 +257,7 @@ div.badges img {
 }
 nav {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
 }
 nav a {
