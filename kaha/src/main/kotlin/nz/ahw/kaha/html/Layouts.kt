@@ -10,15 +10,12 @@ package nz.ahw.kaha.html
 import kotlinx.html.body
 
 object Layouts {
-    object EmptyLayout: Layout() {
-        override val render: LayoutRender = {
-            html {
-                body {
-                    blockContent()
-                }
+    object EmptyLayout: Layout({
+        html {
+            body {
+                blockContent()
             }
-
         }
-    }
+    })
 }
 
