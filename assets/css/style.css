@@ -223,8 +223,12 @@ section h1 {
 }
 
 @media print, screen and (max-width: 720px){
-  body{ word-wrap:break-word; }
-  section{padding:10px 0 10px 20px;margin:0 0 30px}
+  body { word-wrap:break-word; }
+  section {
+    width: 100%;
+    padding: 10px 0 10px 20px;
+    margin:0 0 30px;
+  }
 }
 @media print{
   body{padding:0.4in;font-size:12pt;color:#444}
