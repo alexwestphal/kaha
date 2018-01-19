@@ -20,5 +20,14 @@ object Responses {
             httpServletResponse.sendError(statusCode.value, message)
         }
     }
+
+    /**
+     * Send a Redirect (status 302 - Found) to the client using the specified url.
+     */
+    class Redirect(val url: String): Response {
+        override fun apply(httpServletResponse: HttpServletResponse) {
+            httpServletResponse.sendRedirect(url)
+        }
+    }
 }
 
