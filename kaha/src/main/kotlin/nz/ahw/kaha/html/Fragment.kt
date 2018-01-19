@@ -12,13 +12,13 @@ import nz.ahw.kaha.Response
 import nz.ahw.kaha.Signal
 import javax.servlet.http.HttpServletResponse
 
-class Fragment(val block: Block): Response {
+class Fragment(val render: Render): Response {
     override fun apply(httpServletResponse: HttpServletResponse) {
 
         httpServletResponse.writer.use { writer ->
             try {
-                val blockContext = BlockContext(writer.appendHTML())
-                block(blockContext)
+                val blockContext = RenderContext(writer.appendHTML())
+                render(blockContext)
             } catch (signal: Signal) {
                 // Signals aren't allowed to happen here but we're rethrowing it for Handler to deal with
                 throw signal

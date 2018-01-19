@@ -21,7 +21,7 @@ class HandlerContext(val request: HttpServletRequest) {
     fun signal(response: Response): Nothing = throw Signal(response)
 
     class Attributes(val context: HandlerContext) {
-        operator inline fun <reified T: Any> get(name: String): T? = get(name, T::class)
+        inline operator fun <reified T: Any> get(name: String): T? = get(name, T::class)
 
         @Suppress("UNCHECKED_CAST")
         fun <T: Any> get(name: String, cls: KClass<T>): T? = context.request.getAttribute(name) as? T
@@ -38,12 +38,12 @@ class HandlerContext(val request: HttpServletRequest) {
     }
 
     class Headers(val context: HandlerContext) {
-        operator fun get(name: String) = context.request.getHeader(name)
+        operator fun get(name: String): String = context.request.getHeader(name)
     }
 
     class Parameters(val context: HandlerContext) {
 
-        operator inline fun <reified T: Any> get(name: String): T? = get(name, T::class)
+        inline operator fun <reified T: Any> get(name: String): T? = get(name, T::class)
 
         @Suppress("UNCHECKED_CAST")
         fun <T: Any> get(name: String, cls: KClass<T>): T? = when(cls) {

@@ -7,9 +7,4 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha.html
 
-abstract class Layout(name: String?, val render: LayoutContext.() -> Unit) {
-
-    val layoutName: String = name ?: this::class.java.simpleName
-
-    constructor(render: LayoutContext.() -> Unit): this(null, render)
-}
+open class Layout(val name: String, val body: LayoutContext.() -> LayoutRender)

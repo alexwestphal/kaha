@@ -8,12 +8,20 @@
 package nz.ahw.kaha.html
 
 import kotlinx.html.body
+import kotlinx.html.head
+import kotlinx.html.html
 
 object Layouts {
-    object EmptyLayout: Layout({
-        html {
-            body {
-                blockContent()
+    object EmptyLayout: Layout("EmptyLayout", {
+
+        Render {
+            html {
+                head {
+
+                }
+                body {
+
+                }
             }
         }
     })

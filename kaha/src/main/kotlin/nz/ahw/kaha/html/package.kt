@@ -7,6 +7,6 @@
 \*---------------------------------------------*/
 package nz.ahw.kaha.html
 
-typealias Block = BlockContext<*>.() -> Unit
+typealias Render = RenderContext<*>.() -> Unit
 
-typealias LayoutRender = LayoutContext.() -> Unit
+typealias LayoutRender = LayoutRenderContext<*>.() -> Unit
