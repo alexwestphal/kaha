@@ -9,11 +9,10 @@ package nz.ahw.kaha.html
 
 import nz.ahw.kaha.HandlerContext
 import nz.ahw.kaha.KahaDSL
+import nz.ahw.kaha.RequestContext
 
 @KahaDSL
-class LayoutContext(val parentContext: HandlerContext) {
+class LayoutContext(private val parentContext: HandlerContext): RequestContext by parentContext {
 
     fun Render(render: LayoutRender): LayoutRender = render
-
-
 }
