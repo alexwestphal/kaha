@@ -44,18 +44,28 @@ class MyServlet: KahaServlet() {
 Kaha provides concise typed ways of doing many of things.
 
 - Accessing Request parameters:
-
 ```kotlin
 override fun get() = Handler { userId: Int ->
 
 }
 ```
 
-- Sending Error Codes
-
+- Send a Redirect:
 ```kotlin
 override fun get() = Handler {
-    Response(StatusCodes.ImATeapot)
+    Responses.Redirect("other-page")
+}
+```
+
+- Aborting with an error:
+```kotlin
+override fun get() = Handler {
+    if(isATeaPot()) signal(Response(StatusCodes.ImATeapot))
+    
+    // Skips this
+    Fragment {
+        ...
+    }
 }
 ```
 
@@ -65,8 +75,8 @@ Kaha provides `Layout` as a way to centralise the container style HTML that is c
 
 ```kotlin
 // Defining a layout
-class SimpleLayout(pageTitle: String): Layout() {
-    override val render: LayoutRender = {
+class SimpleLayout(pageTitle: String): Layout"SimpleLayout", {
+    Render {
         html {
             head {
                 title(pageTitle)
@@ -153,7 +163,34 @@ Fragment {
 
 ## Motivation
 
-TODO
+The motivation behind Kaha is wanting a better way to write Servlets and JSPs that can be integrated with an existing application one file at at time. An example of the type of JSP you might want to replace:
+
+```jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%
+    final int productId = request.getParameter("product_id")
+    
+    // Lots more Java
+%>
+<%=SharedHtml.htmlHead(session)%>
+<body>
+    <%=SharedHtml.header(session)%>
+    <div class="page-content">
+        // Use data looked up in the Java above
+        Product is <%= productId %>
+    </div>
+    <%=SharedHtml.footer(session)%>
+</body>
+
+```
+
+Compared to this example, Kaha is:
+- Syntactically simpler
+- In Kotlin not Java
+- More typesafe
+- Validated at compile-time not runtime
+- Easier to write reusable components
+
 
 ## Etymology
 
